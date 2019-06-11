@@ -150,7 +150,6 @@ public class TopicService {
     private void createTopic(Topic topic, String createdBy, CreatorRights creatorRights) {
         topicValidator.ensureCreatedTopicIsValid(topic, creatorRights);
         multiDcExecutor.execute(new CreateTopicRepositoryCommand(topic));
-//        topicRepository.createTopic(topic);
 
         if (!multiDCAwareService.topicExists(topic)) {
             createTopicInBrokers(topic);
@@ -228,7 +227,6 @@ public class TopicService {
                 );
             }
             multiDcExecutor.execute(new UpdateTopicRepositoryCommand(modified));
-//            topicRepository.updateTopic(modified);
             if (!retrieved.wasMigratedFromJsonType() && modified.wasMigratedFromJsonType()) {
                 logger.info("Waiting until all subscriptions have consumers assigned during topic {} content type migration...", topicName.qualifiedName());
                 topicContentTypeMigrationService.waitUntilAllSubscriptionsHasConsumersAssigned(modified,
@@ -244,7 +242,6 @@ public class TopicService {
     public void touchTopic(TopicName topicName) {
         logger.info("Touching topic {}", topicName.qualifiedName());
         multiDcExecutor.execute(new TouchTopicRepositoryCommand(topicName));
-//        topicRepository.touchTopic(topicName);
     }
 
     /**
