@@ -2,6 +2,8 @@ package pl.allegro.tech.hermes.management.config.kafka;
 
 public class KafkaProperties {
 
+    private String dc = "dc";
+
     private String clusterName = "primary_dc";
 
     private String connectionString = "localhost:2181";
@@ -149,12 +151,24 @@ public class KafkaProperties {
         this.kafkaConsumer = kafkaConsumer;
     }
 
+    public String getDc() {
+        return dc;
+    }
+
+    public void setDc(String dc) {
+        this.dc = dc;
+    }
+
     public String getClusterName() {
         return clusterName;
     }
 
     public void setClusterName(String clusterName) {
         this.clusterName = clusterName;
+    }
+
+    public String getQualifiedClusterName() {
+        return clusterName + dc;
     }
 
     public String getOffsetsStorage() {
